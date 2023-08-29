@@ -13,7 +13,7 @@
 
 // Variables
 #define _________ &trans
-#define XXXXXXXXX &none
+#define XXXXXXXXX &nonec
 
 / {
     behaviors {
@@ -22,7 +22,7 @@
             label = "TAP_DANCE_0";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mt LC(C) C>, <&kp LS(C)>;
+            bindings = <&mt LC(&kp) &kp>, <&kp LS(&kp)>;
         };
     };
 
@@ -38,7 +38,7 @@
             bindings = <
             &kp ESC   &kp Q &kp W &kp E &kp R &kp T                                                &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
             &kp TAB   &kp A &kp S &kp D &kp F &kp G                                                &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-            &kp LSHFT &kp Z &kp X &kp C &kp V &kp B XXXXXXXXX &td_mt        XXXXXXXXX XXXXXXXXX &kp N &kp M  &kp COMMA &kp DOT &kp FSLH XXXXXXXXX
+            &kp LSHFT &kp Z &kp X &kp C &kp V &kp B XXXXXXXXX &td_mt C        XXXXXXXXX XXXXXXXXX &kp N &kp M  &kp COMMA &kp DOT &kp FSLH XXXXXXXXX
                         XXXXXXXXX &kp LALT &kp LCMD &kp SPACE &kp RET        XXXXXXXXX &kp BACKSPACE  XXXXXXXXX XXXXXXXXX XXXXXXXXX
             >;
         };
