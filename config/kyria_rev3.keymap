@@ -26,7 +26,7 @@
             label = "TAP_DANCE_0";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <ALCTRL(C)>, <LS(C)>;
+            bindings = <&mt LC(C) C>, <LS(C)>;
         };
     };
 
