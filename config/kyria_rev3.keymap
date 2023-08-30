@@ -14,7 +14,7 @@
 // Variables
 #define _________ &trans
 #define XXXXXXXXX &none
-#define SMART_SHFT &bt_sh 0 0
+#define SMART_SHFT &bt_sh LSHIFT LSHIFT
 
 / {
     behaviors {
@@ -43,7 +43,7 @@
             tapping-term-ms = <135>;
             quick-tap-ms = <0>;
             flavor = "tap-preferred";
-            bindings = <&skq LSHIFT>, <&kp LSHIFT>;
+            bindings = <&skq>, <&kp>;
         };
     };
 
