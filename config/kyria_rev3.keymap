@@ -14,15 +14,26 @@
 // Variables
 #define _________ &trans
 #define XXXXXXXXX &nonec
+#define SMART_SHFT &bt_sh 0 0
 
 / {
     behaviors {
-        skp: smart_tap_dance {
+        td_mt: tap_dance_mod_tap {
             compatible = "zmk,behavior-tap-dance";
-            label = "SMART_TAP_DANCE";
+            label = "TAP_DANCE_0";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mt LC(&kp) &kp>, <&kp LS(&kp)>;
+            bindings = <&mt LC(C) C>, <&kp LS(C)>;
+        };
+
+        bt_sh: sticky_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <135>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = &sk LSHIFT, LSHIFT;
         };
     };
 
@@ -36,10 +47,10 @@
         //                     | ALT | CMD | RET |  SPACE  |  RET  |    |  -  | BSPC |      |     |     |
         enlang_layer {
             bindings = <
-            &kp ESC   &skp Q &skp W &skp E &skp R &skp T                                                &skp Y &skp U  &skp I     &skp O   &skp P    &kp BSLH
-            &kp TAB   &skp A &skp S &skp D &skp F &skp G                                                &skp H &skp J  &skp K     &skp L   &kp SEMI &kp SQT
-            &kp LSHFT &skp Z &skp X &skp C &skp V &skp B XXXXXXXXX XXXXXXXXX        XXXXXXXXX XXXXXXXXX &skp N &skp M  &kp COMMA &kp DOT &kp FSLH XXXXXXXXX
-                        XXXXXXXXX &kp LALT &kp LCMD &kp SPACE &kp RET        XXXXXXXXX &kp BACKSPACE  XXXXXXXXX XXXXXXXXX XXXXXXXXX
+            &kp ESC   &kp Q &kp W &kp E &kp R &kp T                                                &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
+            &kp TAB   &kp A &kp S &kp D &kp F &kp G                                                &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+            &kp LSHFT &kp Z &kp X &kp C &kp V &kp B XXXXXXXXX &kp SPACE       XXXXXXXXX XXXXXXXXX &kp N &kp M  &kp COMMA &kp DOT &kp FSLH XXXXXXXXX
+                        XXXXXXXXX &kp LALT &kp LCMD SMART_SHFT &kp RET        XXXXXXXXX &kp BACKSPACE  XXXXXXXXX XXXXXXXXX XXXXXXXXX
             >;
         };
 
