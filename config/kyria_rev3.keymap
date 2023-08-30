@@ -23,7 +23,7 @@
             label = "STICKY_KEY_QUICK_RELEASE";
             #binding-cells = <1>;
             bindings = <&kp>;
-            release-after-ms = <200>;
+            release-after-ms = <700>; // duration.extra-long1
             quick-release;
             ignore-modifiers;
         };
@@ -32,7 +32,7 @@
             compatible = "zmk,behavior-tap-dance";
             label = "TAP_DANCE_0";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <200>; // duration.short4
             bindings = <&mt LC(C) C>, <&kp LS(C)>;
         };
 
@@ -40,7 +40,7 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
-            tapping-term-ms = <135>;
+            tapping-term-ms = <150>; // duration.short3
             quick-tap-ms = <0>;
             flavor = "tap-preferred";
             bindings = <&skq>, <&kp>;
@@ -63,6 +63,8 @@
                         XXXXXXXXX &kp LALT &kp LCMD SMART_SHFT &kp RET        XXXXXXXXX &kp BACKSPACE  XXXXXXXXX XXXXXXXXX XXXXXXXXX
             >;
         };
+dDDDDDFfdfQsdFgfddfgsdfFsdfsdfsdDSFSFSDfdfdffdfdefrFD
+
 
         test_layer {
             bindings = <
