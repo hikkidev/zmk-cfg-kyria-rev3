@@ -54,11 +54,11 @@
         sll: select_lang_layer {
             compatible = "zmk,behavior-macro-one-param";
             label = "macro_select_lang_and_layer";
-            #binding-cells = <1>; // Must be 1
+            #binding-cells = <1>;
             bindings = 
+                <&kp LA(SPACE)>,
                 <&macro_param_1to1>,
-                <&macro_press &to MACRO_PLACEHOLDER>,
-                <&kp LA(SPACE)>
+                <&macro_press &to MACRO_PLACEHOLDER>
             ;
         };
     };
@@ -79,7 +79,7 @@
             bindings = <
             XXX &kp Q &kp W &kp E &kp R &kp T                                 &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
             XXX &kp A &kp S &kp D &kp F &kp G                                 &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-            XXX &kp Z &kp X &kp C &kp V &kp B &sll L_EN      XXX      XXX XXX &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &to L_EN
+            XXX &kp Z &kp X &kp C &kp V &kp B &sll L_EN  XXX          XXX XXX &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &to L_EN
                             XXX   XXX   XXX   SMART_SHFT &kp SPACE    XXX XXX XXX XXX XXX
             >;
         };
