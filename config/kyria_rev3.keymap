@@ -18,6 +18,16 @@
 
 / {
     behaviors {
+        skq: sticky_key_quick_release {
+            compatible = "zmk,behavior-sticky-key";
+            label = "STICKY_KEY_QUICK_RELEASE";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <200>;
+            quick-release;
+            ignore-modifiers;
+        };
+
         td_mt: tap_dance_mod_tap {
             compatible = "zmk,behavior-tap-dance";
             label = "TAP_DANCE_0";
@@ -33,7 +43,7 @@
             tapping-term-ms = <135>;
             quick-tap-ms = <0>;
             flavor = "tap-preferred";
-            bindings = &sk LSHIFT, LSHIFT;
+            bindings = <&skq LSHIFT>, <&kp LSHIFT>;
         };
     };
 
