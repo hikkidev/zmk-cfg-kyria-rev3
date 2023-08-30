@@ -53,6 +53,7 @@
     macros {
         sll: select_lang_layer {
             compatible = "zmk,behavior-macro-one-param";
+            label = "macro_select_lang_and_layer";
             #binding-cells = <1>; // Must be 1
             bindings = 
                 <&macro_param_1to1>,
