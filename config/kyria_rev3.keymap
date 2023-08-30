@@ -9,11 +9,14 @@
 #include "keys_ru.h"
 
 // Layers
-#define L_DEFAULT 0
+#define L_EN 0
+#define L_RU 1
 
 // Variables
-#define _________ &trans
-#define XXXXXXXXX &none
+#define ___ &trans
+#define XXX &none
+
+
 #define SMART_SHFT &bt_sh LSHIFT LSHIFT
 
 / {
@@ -47,72 +50,65 @@
         };
     };
 
+    macros {
+        sll: select_lang_layer {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>; // Must be 1
+            bindings = 
+                <&macro_param_1to1>,
+                <&macro_press &to MACRO_PLACEHOLDER>,
+                <&kp LA(SPACE)>
+            ;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
-        // ---------------------------------------------------------------------------------------------------------------------------------
-        // |  ESC  |  Q  |  W  |  E  |  R  |  T  |                                   |  Y   |  U  |  I  |  O  |   P   |   \  |
-        // |  TAB  |  A  |  S  |  D  |  F  |  G  |                                   |  H   |  J  |  K  |  L  |   ;   |   '  |
-        // | SHIFT |  Z  |  X  |  C  |  V  |  B  |         |   -   |    |  -  |      |  N   |  M  |  ,  |  .  |   /   |      |
-        //                     | ALT | CMD | RET |  SPACE  |  RET  |    |  -  | BSPC |      |     |     |
-        enlang_layer {
+        layer_home_workman {
             bindings = <
-            &kp ESC   &kp Q &kp W &kp E &kp R &kp T                                                &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
-            &kp TAB   &kp A &kp S &kp D &kp F &kp G                                                &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-            &kp LSHFT &kp Z &kp X &kp C &kp V &kp B XXXXXXXXX &kp SPACE       XXXXXXXXX XXXXXXXXX &kp N &kp M  &kp COMMA &kp DOT &kp FSLH XXXXXXXXX
-                        XXXXXXXXX &kp LALT &kp LCMD SMART_SHFT &kp RET        XXXXXXXXX &kp BACKSPACE  XXXXXXXXX XXXXXXXXX XXXXXXXXX
+            XXX &kp Q &kp D &kp R &kp W &kp B                                 &kp J &kp F &kp U     &kp P   &kp SEMI XXX
+            XXX &kp A &kp S &kp H &kp T &kp G                                 &kp Y &kp N &kp E     &kp O   &kp I    XXX
+            XXX &kp Z &kp X &kp M &kp C &kp V XXX        &sll L_RU    XXX XXX &kp K &kp L &kp COMMA &kp DOT &kp FSLH XXX
+                            XXX   XXX   XXX   SMART_SHFT &kp SPACE    XXX XXX XXX XXX XXX
             >;
         };
 
-        test_layer {
+        layer_qwerty {
             bindings = <
-            XXXXXXXXX &kp N1 &kp N2 &kp N3 &kp N4 &kp N5                                              XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX
-            XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX                                              XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX
-            XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX      XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX
-                                          XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX      XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX
+            XXX &kp Q &kp W &kp E &kp R &kp T                                 &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
+            XXX &kp A &kp S &kp D &kp F &kp G                                 &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+            XXX &kp Z &kp X &kp C &kp V &kp B &sll L_EN      XXX      XXX XXX &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &to L_EN
+                            XXX   XXX   XXX   SMART_SHFT &kp SPACE    XXX XXX XXX XXX XXX
             >;
         };
 
-        // ---------------------------------------------------------------------------------------------------------------------------------
-        // |  ESC  |  Й  |  Ц  |  У  |  К  |  Е  |                                       |  Н  |  Г  |  Ш  |  Щ  |  З  |  Х  |
-        // |  TAB  |  Ф  |  Ы  |  В  |  А  |  П  |                                       |  Р  |  О  |  Л  |  Д  |  Ж  |  Э  |
-        // | SHIFT |  Я  |  Ч  |  С  |  М  |  И  |         |   -   |    |   -   |        |  Т  |  Ь  |  Б  |  Ю  |     |     |
-        //                     |     | ALT | CMD |  SPACE  |  RET  |    |   -   |  BSPC  |     |     |     |
-        //rulang_layer {
-        //    bindings = <
-        //    &kp ESC   &kp RU_CYRILLIC_SHORT_I &kp RU_CYRILLIC_TSE  &kp RU_CYRILLIC_U  &kp RU_CYRILLIC_KA &kp RU_CYRILLIC_IE                                           &kp RU_CYRILLIC_EN &kp RU_CYRILLIC_GHE       &kp RU_CYRILLIC_SHA &kp RU_CYRILLIC_SHCHA &kp RU_CYRILLIC_ZE  &kp RU_CYRILLIC_HA
-        //    &kp TAB   &kp RU_CYRILLIC_EF      &kp RU_CYRILLIC_YERU &kp RU_CYRILLIC_VE &kp RU_CYRILLIC_A  &kp RU_CYRILLIC_PE                                           &kp RU_CYRILLIC_ER &kp RU_CYRILLIC_O         &kp RU_CYRILLIC_EL  &kp RU_CYRILLIC_DE    &kp RU_CYRILLIC_ZHE &kp RU_CYRILLIC_E
-        //    &kp LSHFT &kp RU_CYRILLIC_YA      &kp RU_CYRILLIC_CHE  &kp RU_CYRILLIC_ES &kp RU_CYRILLIC_EM &kp RU_CYRILLIC_I &to LAYER_EN XXXXXXXXX    XXXXXXXXX XXXXXXXXX &kp RU_CYRILLIC_TE &kp RU_CYRILLIC_SOFT_SIGN &kp RU_CYRILLIC_BE  &kp RU_CYRILLIC_YU    XXXXXXXXX XXXXXXXXX
-        //                                                                                     XXXXXXXXX &kp LALT &kp LCMD &kp SPACE &kp RET      XXXXXXXXX &kp BACKSPACE XXXXXXXXX XXXXXXXXX XXXXXXXXX
-        //    >;
-        //};
-
-        // game_layer {
-        //      bindings = <
-        //      &kp ESC &kp N1 &kp N2 &kp N3 &kp N4 &kp N5                                              &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp BACKSPACE
-        //      &kp TAB &kp LSHFT &kp Q &kp W &kp E &kp R                                              &kp T &kp Y &kp UP_ARROW &kp I &kp O &kp ENTER
-        //      &kp LCMD &kp LCTRL &kp A &kp S &kp D &kp F &kp G &kp H      &kp J &kp K &kp L &kp LEFT_ARROW &kp DOWN_ARROW &kp RIGHT_ARROW &kp P XXXXXXXXX
-        //                           &kp Z &kp X &kp C &kp SPACE &kp V      &kp B &kp N &kp M XXXXXXXXX XXXXXXXXX
-        //      >;
-        // };
+        layer_games_qwerty {
+             bindings = <
+             &kp ESC   &kp N1    &kp N2 &kp N3 &kp N4 &kp N5                                  &kp N6 &kp N7         &kp N8         &kp N9          &kp N0 &kp BACKSPACE
+             &kp TAB   XXX       &kp Q  &kp W  &kp E  &kp R                                   &kp T  &kp Y          &kp UP_ARROW   &kp I           &kp O  &kp ENTER
+             &kp GRAVE &kp LSHFT &kp A  &kp S  &kp D  &kp F &kp G     &kp H       &kp J &kp K &kp L  &kp LEFT_ARROW &kp DOWN_ARROW &kp RIGHT_ARROW &kp P  &to L_EN
+                                        &kp Z  &kp X  &kp C &kp LCTRL &kp SPACE   &kp V &kp B &kp N  &kp M          XXX
+             >;
+        };
 
         // LAYER TEMPLATES
 
         // layer_name {
         //     bindings = <
-        //     _________ _________ _________ _________ _________ _________                                              _________ _________ _________ _________ _________ _________
-        //     _________ _________ _________ _________ _________ _________                                              _________ _________ _________ _________ _________ _________
-        //     _________ _________ _________ _________ _________ _________ _________ _________      _________ _________ _________ _________ _________ _________ _________ _________
-        //                                   _________ _________ _________ _________ _________      _________ _________ _________ _________ _________
+        //     ___ ___ ___ ___ ___ ___                      ___ ___ ___ ___ ___ ___
+        //     ___ ___ ___ ___ ___ ___                      ___ ___ ___ ___ ___ ___
+        //     ___ ___ ___ ___ ___ ___ ___ ___      ___ ___ ___ ___ ___ ___ ___ ___
+        //                 ___ ___ ___ ___ ___      ___ ___ ___ ___ ___
         //     >;
         // };
 
         // layer_name {
         //     bindings = <
-        //     XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX                                              XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX
-        //     XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX                                              XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX
-        //     XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX      XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX
-        //                                   XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX      XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX
+        //     XXX XXX XXX XXX XXX XXX                      XXX XXX XXX XXX XXX XXX
+        //     XXX XXX XXX XXX XXX XXX                      XXX XXX XXX XXX XXX XXX
+        //     XXX XXX XXX XXX XXX XXX XXX XXX      XXX XXX XXX XXX XXX XXX XXX XXX
+        //                 XXX XXX XXX XXX XXX      XXX XXX XXX XXX XXX
         //     >;
         // };
     };
