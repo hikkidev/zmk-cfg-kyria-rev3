@@ -13,7 +13,7 @@
 
 // Variables
 #define _________ &trans
-#define XXXXXXXXX &nonec
+#define XXXXXXXXX &none
 #define SMART_SHFT &bt_sh 0 0
 
 / {
