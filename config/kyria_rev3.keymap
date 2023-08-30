@@ -63,8 +63,6 @@
                         XXXXXXXXX &kp LALT &kp LCMD SMART_SHFT &kp RET        XXXXXXXXX &kp BACKSPACE  XXXXXXXXX XXXXXXXXX XXXXXXXXX
             >;
         };
-dDDDDDFfdfQsdFgfddfgsdfFsdfsdfsdDSFSFSDfdfdffdfdefrFD
-
 
         test_layer {
             bindings = <
