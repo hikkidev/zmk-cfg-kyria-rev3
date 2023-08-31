@@ -11,8 +11,9 @@
 // Layers
 #define L_EN 0
 #define L_RU 1
-#define L_SYS 2
-#define L_GAME 3
+#define L_NUM 2
+#define L_SYS 3
+#define L_GAME 4
 
 // Variables
 #define ___ &trans
@@ -20,6 +21,7 @@
 
 #define MOD(keycode) LG(keycode)
 #define SMART_SHFT &bt_sh LSHIFT LSHIFT
+#define CHG_LANG LA(SPACE)
 
 / {
     behaviors {
@@ -53,12 +55,12 @@
     };
 
     macros {
-        sll: toggle_lang_layer {
+        mtll: toggle_lang_layer {
             compatible = "zmk,behavior-macro-one-param";
             label = "macro_toggle_lang_and_layer";
             #binding-cells = <1>;
             bindings = 
-                <&kp LA(SPACE)>,
+                <&kp CHG_LANG>,
                 <&macro_param_1to1>,
                 <&macro_press &tog MACRO_PLACEHOLDER>
             ;
@@ -75,10 +77,10 @@
 
         layer_home_workman {
             bindings = <
-            XXX &kp Q &kp D &kp R &kp W &kp B                                     &kp J &kp F &kp U     &kp P   &kp SEMI XXX
-            XXX &kp A &kp S &kp H &kp T &kp G                                     &kp Y &kp N &kp E     &kp O   &kp I    XXX
-            XXX &kp Z &kp X &kp M &kp C &kp V XXX       XXX               XXX XXX &kp K &kp L &kp COMMA &kp DOT &kp FSLH XXX
-                            XXX   &mo L_SYS   &kp SPACE SMART_SHFT XXX    XXX XXX XXX   XXX   XXX
+            XXX &kp Q &kp D &kp R &kp W     &kp B                               &kp J     &kp F &kp U     &kp P   &kp SEMI XXX
+            XXX &kp A &kp S &kp H &kp T     &kp G                               &kp Y     &kp N &kp E     &kp O   &kp I    XXX
+            XXX &kp Z &kp X &kp M &kp C     &kp V     XXX        XXX    XXX XXX &kp K     &kp L &kp COMMA &kp DOT &kp FSLH XXX
+                            XXX   &mo L_SYS &kp SPACE SMART_SHFT XXX    XXX XXX &to L_NUM XXX   XXX
             >;
         };
 
@@ -95,21 +97,21 @@
             >;
         };
 
-        layer_system_nav {
+        layer_numbers {
             bindings = <
-            &sll L_RU XXX         &kp MOD(N7) &kp MOD(N8) &kp MOD(N9) XXX                      XXX XXX XXX XXX XXX XXX
-            XXX       &kp MOD(N0) &kp MOD(N1) &kp MOD(N2) &kp MOD(N3) XXX                      XXX XXX XXX XXX XXX XXX
-            XXX       XXX         &kp MOD(N4) &kp MOD(N5) &kp MOD(N6) XXX XXX XXX      XXX XXX XXX XXX XXX XXX XXX XXX
-                                              XXX         XXX         XXX XXX XXX      XXX XXX XXX XXX XXX
+            XXX XXX    &kp N7 &kp N8 &kp N9 XXX                     XXX XXX XXX XXX &kp RU_SEMI XXX
+            XXX &kp N0 &kp N1 &kp N2 &kp N3 XXX                     XXX XXX XXX XXX XXX XXX
+            XXX XXX    &kp N4 &kp N5 &kp N6 XXX XXX XXX     XXX XXX XXX XXX &kp RU_COMMA &kp RU_DOT &kp RU_FSLH XXX
+                       ___    ___    ___    ___ ___ ___     ___ ___ ___ ___ ___
             >;
         };
 
-        layer_numbers {
+        layer_system_nav {
             bindings = <
-            ___ ___    &kp N7 &kp N8 &kp N9 ___                     ___ ___ ___ ___ ___ ___
-            ___ &kp N0 &kp N1 &kp N2 &kp N3 ___                     ___ ___ ___ ___ ___ ___
-            ___ ___    &kp N4 &kp N5 &kp N6 ___ ___ ___     ___ ___ ___ ___ ___ ___ ___ ___
-                       ___    ___    ___    ___ ___ ___     ___ ___ ___ ___ ___
+            &mtll L_RU   XXX         &kp MOD(N7) &kp MOD(N8) &kp MOD(N9) XXX                      XXX XXX XXX XXX XXX XXX
+            &kp CHG_LANG &kp MOD(N0) &kp MOD(N1) &kp MOD(N2) &kp MOD(N3) XXX                      XXX XXX XXX XXX XXX XXX
+            XXX          XXX         &kp MOD(N4) &kp MOD(N5) &kp MOD(N6) XXX XXX XXX      XXX XXX XXX XXX XXX XXX XXX XXX
+                                              XXX         XXX         XXX XXX XXX      XXX XXX XXX XXX XXX
             >;
         };
 
