@@ -9,9 +9,9 @@
 #include "keys_ru.h"
 
 // Layers
-#define L_EN 0
-#define L_RU 1
-#define L_NUM 2
+#define L_HOME 0
+#define L_NUM 1
+#define L_SYM 2
 #define L_SYS 3
 #define L_GAME 4
 
@@ -75,41 +75,51 @@
         // |  -  |  Z  |  X  |  M  |  C  |  V  |  -  |  -  |    |  -  |  -  |  K  |  L  |  ,  |  .  |  /  |  -  |
         //          |  -  |  SYS  |  SPACE  |  SHFT  |  -  |    |  -  |  -  |  -  |  -  |  -  |
 
-        layer_home_workman {
-            bindings = <
-            XXX &kp Q &kp D &kp R &kp W     &kp B                               &kp J     &kp F &kp U     &kp P   &kp SEMI XXX
-            XXX &kp A &kp S &kp H &kp T     &kp G                               &kp Y     &kp N &kp E     &kp O   &kp I    XXX
-            XXX &kp Z &kp X &kp M &kp C     &kp V     XXX        XXX    XXX XXX &kp K     &kp L &kp COMMA &kp DOT &kp FSLH XXX
-                            XXX   &mo L_SYS &kp SPACE SMART_SHFT XXX    XXX XXX &to L_NUM XXX   XXX
-            >;
-        };
+        //layer_home_workman {
+        //    bindings = <
+        //    XXX &kp Q &kp D &kp R &kp W     &kp B                               &kp J     &kp F &kp U     &kp P   &kp SEMI XXX
+        //    XXX &kp A &kp S &kp H &kp T     &kp G                               &kp Y     &kp N &kp E     &kp O   &kp I    XXX
+        //    XXX &kp Z &kp X &kp M &kp C     &kp V     XXX        XXX    XXX XXX &kp K     &kp L &kp COMMA &kp DOT &kp FSLH XXX
+        //                    XXX   &mo L_SYS &kp SPACE SMART_SHFT XXX    XXX XXX &to L_NUM XXX   XXX
+        //    >;
+        //};
 
         // |  -  |  Й  |  Ц  |  У  |  К  |  Е\Ё  |                            |  Н  |   Г   |  Ш  |  Щ  |  З  |  Х  |
         // |  -  |  Ф  |  Ы  |  В  |  А  |   П   |                            |  Р  |   О   |  Л  |  Д  |  Ж  |  Э  |
         // |  -  |  Я  |  Ч  |  С  |  М  |   И   |  -  |  -  |    |  -  |  -  |  Т  |  Ь\Ъ  |  Б  |  Ю  |  -  |  -  |
 
-        layer_lang_ru {
+        layer_home {
             bindings = <
-            XXX &kp RU_CYRILLIC_SHORT_I &kp RU_CYRILLIC_TSE  &kp RU_CYRILLIC_U  &kp RU_CYRILLIC_KA &mt RU_CYRILLIC_IO RU_CYRILLIC_IE                    &kp RU_CYRILLIC_EN &kp RU_CYRILLIC_GHE                             &kp RU_CYRILLIC_SHA &kp RU_CYRILLIC_SHCHA &kp RU_CYRILLIC_ZE  &kp RU_CYRILLIC_HA
-            XXX &kp RU_CYRILLIC_EF      &kp RU_CYRILLIC_YERU &kp RU_CYRILLIC_VE &kp RU_CYRILLIC_A  &kp RU_CYRILLIC_PE                                   &kp RU_CYRILLIC_ER &kp RU_CYRILLIC_O                               &kp RU_CYRILLIC_EL  &kp RU_CYRILLIC_DE    &kp RU_CYRILLIC_ZHE &kp RU_CYRILLIC_E
-            XXX &kp RU_CYRILLIC_YA      &kp RU_CYRILLIC_CHE  &kp RU_CYRILLIC_ES &kp RU_CYRILLIC_EM &kp RU_CYRILLIC_I                 XXX XXX    XXX XXX &kp RU_CYRILLIC_TE &mt RU_CYRILLIC_HARD_SIGN RU_CYRILLIC_SOFT_SIGN &kp RU_CYRILLIC_BE  &kp RU_CYRILLIC_YU    XXX                 XXX
-                                                             ___                ___                ___                               ___ ___    ___ ___ ___                ___                                             ___
+            XXX &kp Q &kp W &kp E &kp R &mt GRAVE T                            &kp Y &kp U &kp I &kp O &kp P &kp RU_CYRILLIC_HA
+            XXX &kp A &kp S &kp D &kp F &kp G                                  &kp H &kp J &kp K &kp L &kp RU_CYRILLIC_ZHE &kp RU_CYRILLIC_E
+            XXX &kp Z &kp X &kp C &kp V &kp B XXX        XXX           XXX XXX &kp N &mt RU_CYRILLIC_HARD_SIGN M &kp RU_CYRILLIC_BE  &kp RU_CYRILLIC_YU XXX XXX
+                      XXX &mo L_SYS &kp SPACE SMART_SHFT XXX           XXX XXX &to L_NUM XXX XXX
             >;
         };
 
         layer_numbers {
             bindings = <
-            XXX XXX    &kp N7 &kp N8 &kp N9 XXX                     XXX XXX XXX XXX &kp RU_SEMI XXX
-            XXX &kp N0 &kp N1 &kp N2 &kp N3 XXX                     XXX XXX XXX XXX XXX XXX
-            XXX XXX    &kp N4 &kp N5 &kp N6 XXX XXX XXX     XXX XXX XXX XXX &kp RU_COMMA &kp RU_DOT &kp RU_FSLH XXX
-                       ___    ___    ___    ___ ___ ___     ___ ___ ___ ___ ___
+            XXX XXX    &kp N7 &kp N8 &kp N9 XXX                     XXX XXX XXX XXX &kp BSPC XXX
+            XXX &kp N0 &kp N1 &kp N2 &kp N3 XXX                     XXX XXX XXX XXX &kp RET XXX
+            XXX XXX    &kp N4 &kp N5 &kp N6 XXX XXX XXX     XXX XXX XXX XXX XXX XXX XXX XXX
+                       ___    ___    ___    &to L_HOME ___ ___     ___ ___ &to L_SYM ___ ___
             >;
         };
 
+        // !@#$%^&*()_-+=    \|/ ?., '" ;: []{}
+        layer_symbols {
+            bindings = <
+            XXX &kp EXCL &kp AT   &kp LBKT &kp RBKT XXX                     XXX XXX XXX XXX &kp BSPC XXX
+            XXX XXX      &kp APOS &kp LBRC &kp RBRC &kp DLLR                     XXX XXX XXX XXX &kp RET XXX
+            XXX XXX      XXX      &kp LPAR &kp RPAR XXX      XXX XXX     XXX XXX XXX XXX XXX XXX XXX XXX
+                       ___    ___    ___    &to L_HOME ___ ___     ___ ___ &to L_NUM ___ ___
+            >;
+        };
+ 
         layer_system_nav {
             bindings = <
-            &mtll L_RU   XXX         &kp MOD(N7) &kp MOD(N8) &kp MOD(N9) XXX                      XXX XXX XXX XXX XXX XXX
-            &kp CHG_LANG &kp MOD(N0) &kp MOD(N1) &kp MOD(N2) &kp MOD(N3) XXX                      XXX XXX XXX XXX XXX XXX
+            &kp CHG_LANG XXX         &kp MOD(N7) &kp MOD(N8) &kp MOD(N9) XXX                      XXX XXX XXX XXX XXX XXX
+            XXX          &kp MOD(N0) &kp MOD(N1) &kp MOD(N2) &kp MOD(N3) XXX                      XXX XXX XXX XXX XXX XXX
             XXX          XXX         &kp MOD(N4) &kp MOD(N5) &kp MOD(N6) XXX XXX XXX      XXX XXX XXX XXX XXX XXX XXX XXX
                                               XXX         XXX         XXX XXX XXX      XXX XXX XXX XXX XXX
             >;
