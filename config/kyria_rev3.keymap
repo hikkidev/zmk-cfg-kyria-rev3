@@ -18,7 +18,7 @@
 #define ___ &trans
 #define XXX &none
 
-
+#define MOD(keycode) LG(keycode)
 #define SMART_SHFT &bt_sh LSHIFT LSHIFT
 
 / {
@@ -53,20 +53,25 @@
     };
 
     macros {
-        sll: select_lang_layer {
+        sll: toggle_lang_layer {
             compatible = "zmk,behavior-macro-one-param";
-            label = "macro_select_lang_and_layer";
+            label = "macro_toggle_lang_and_layer";
             #binding-cells = <1>;
             bindings = 
                 <&kp LA(SPACE)>,
                 <&macro_param_1to1>,
-                <&macro_press &to MACRO_PLACEHOLDER>
+                <&macro_press &tog MACRO_PLACEHOLDER>
             ;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
+
+        // |  -  |  Q  |  D  |  R  |  W  |  B  |                            |  J  |  F  |  U  |  P  |  ;  |  -  |
+        // |  -  |  A  |  S  |  H  |  T  |  G  |                            |  Y  |  N  |  E  |  O  |  I  |  -  |
+        // |  -  |  Z  |  X  |  M  |  C  |  V  |  -  |  -  |    |  -  |  -  |  K  |  L  |  ,  |  .  |  /  |  -  |
+        //          |  -  |  SYS  |  SPACE  |  SHFT  |  -  |    |  -  |  -  |  -  |  -  |  -  |
 
         layer_home_workman {
             bindings = <
@@ -77,30 +82,34 @@
             >;
         };
 
-        layer_qwerty {
+        // |  -  |  Й  |  Ц  |  У  |  К  |  Е\Ё  |                            |  Н  |   Г   |  Ш  |  Щ  |  З  |  Х  |
+        // |  -  |  Ф  |  Ы  |  В  |  А  |   П   |                            |  Р  |   О   |  Л  |  Д  |  Ж  |  Э  |
+        // |  -  |  Я  |  Ч  |  С  |  М  |   И   |  -  |  -  |    |  -  |  -  |  Т  |  Ь\Ъ  |  Б  |  Ю  |  -  |  -  |
+
+        layer_lang_ru {
             bindings = <
-            XXX &kp Q &kp W &kp E &kp R &kp T                    &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
-            XXX &kp A &kp S &kp D &kp F &kp G                    &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-            XXX &kp Z &kp X &kp C &kp V &kp B XXX XXX    XXX XXX &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &to L_EN
-                            ___   ___   ___   ___ ___    ___ ___ ___   ___    ___
+            XXX &kp RU_CYRILLIC_SHORT_I &kp RU_CYRILLIC_TSE  &kp RU_CYRILLIC_U  &kp RU_CYRILLIC_KA &mt RU_CYRILLIC_IO RU_CYRILLIC_IE                    &kp RU_CYRILLIC_EN &kp RU_CYRILLIC_GHE                             &kp RU_CYRILLIC_SHA &kp RU_CYRILLIC_SHCHA &kp RU_CYRILLIC_ZE  &kp RU_CYRILLIC_HA
+            XXX &kp RU_CYRILLIC_EF      &kp RU_CYRILLIC_YERU &kp RU_CYRILLIC_VE &kp RU_CYRILLIC_A  &kp RU_CYRILLIC_PE                                   &kp RU_CYRILLIC_ER &kp RU_CYRILLIC_O                               &kp RU_CYRILLIC_EL  &kp RU_CYRILLIC_DE    &kp RU_CYRILLIC_ZHE &kp RU_CYRILLIC_E
+            XXX &kp RU_CYRILLIC_YA      &kp RU_CYRILLIC_CHE  &kp RU_CYRILLIC_ES &kp RU_CYRILLIC_EM &kp RU_CYRILLIC_I                 XXX XXX    XXX XXX &kp RU_CYRILLIC_TE &mt RU_CYRILLIC_HARD_SIGN RU_CYRILLIC_SOFT_SIGN &kp RU_CYRILLIC_BE  &kp RU_CYRILLIC_YU    XXX                 XXX
+                                                             ___                ___                ___                               ___ ___    ___ ___ ___                ___                                             ___
             >;
         };
 
         layer_system_nav {
             bindings = <
-            ___ ___        &kp LG(N7) &kp LG(N8) &kp LG(N9) ___                  ___ ___ ___ ___ ___ ___
-            ___ &kp LG(N0) &kp LG(N1) &kp LG(N2) &kp LG(N3) ___                  ___ ___ ___ ___ ___ ___
-            ___ ___        &kp LG(N4) &kp LG(N5) &kp LG(N6) ___ ___      ___ ___ ___ ___ ___ ___ ___ ___
-                           ___        ___        ___        ___ ___      ___ ___ ___ ___ ___
+            &sll L_RU XXX         &kp MOD(N7) &kp MOD(N8) &kp MOD(N9) XXX                      XXX XXX XXX XXX XXX XXX
+            XXX       &kp MOD(N0) &kp MOD(N1) &kp MOD(N2) &kp MOD(N3) XXX                      XXX XXX XXX XXX XXX XXX
+            XXX       XXX         &kp MOD(N4) &kp MOD(N5) &kp MOD(N6) XXX XXX XXX      XXX XXX XXX XXX XXX XXX XXX XXX
+                                              XXX         XXX         XXX XXX XXX      XXX XXX XXX XXX XXX
             >;
         };
 
         layer_numbers {
             bindings = <
-            ___ ___    &kp N7 &kp N8 &kp N9 ___                  ___ ___ ___ ___ ___ ___
-            ___ &kp N0 &kp N1 &kp N2 &kp N3 ___                  ___ ___ ___ ___ ___ ___
-            ___ ___    &kp N4 &kp N5 &kp N6 ___ ___      ___ ___ ___ ___ ___ ___ ___ ___
-                       ___    ___    ___    ___ ___      ___ ___ ___ ___ ___
+            ___ ___    &kp N7 &kp N8 &kp N9 ___                     ___ ___ ___ ___ ___ ___
+            ___ &kp N0 &kp N1 &kp N2 &kp N3 ___                     ___ ___ ___ ___ ___ ___
+            ___ ___    &kp N4 &kp N5 &kp N6 ___ ___ ___     ___ ___ ___ ___ ___ ___ ___ ___
+                       ___    ___    ___    ___ ___ ___     ___ ___ ___ ___ ___
             >;
         };
 
