@@ -91,7 +91,7 @@
         layer_home {
             bindings = <
             &kp ESC &kp Q &kp W &kp E &kp R &bt_sh GRAVE T                         &kp Y &kp U         &kp I     &kp O   &kp P    &kp LBKT
-            &lp TAB &kp A &kp S &kp D &kp F &kp G                                  &kp H &kp J         &kp K     &kp L   &kp SEMI &kp APOS
+            &kp TAB &kp A &kp S &kp D &kp F &kp G                                  &kp H &kp J         &kp K     &kp L   &kp SEMI &kp APOS
             XXX     &kp Z &kp X &kp C &kp V &kp B ___        ___           ___ ___ &kp N &bt_sh RBKT M &kp COMMA &kp DOT &kp FSLH XXX
                           XXX &mo L_SYS &kp SPACE SMART_SHFT XXX           XXX &to L_NUM &kp LALT XXX XXX
             >;
