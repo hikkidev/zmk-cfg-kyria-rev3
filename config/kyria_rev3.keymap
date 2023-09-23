@@ -93,10 +93,10 @@
 
         layer_system_nav {
             bindings = <
-            &kp CHG_LANG XXX         &kp MOD(N7) &kp MOD(N8) &kp MOD(N9) XXX                      XXX XXX XXX XXX XXX XXX
-            XXX          &kp MOD(N0) &kp MOD(N1) &kp MOD(N2) &kp MOD(N3) XXX                      XXX XXX XXX XXX XXX XXX
-            XXX          XXX         &kp MOD(N4) &kp MOD(N5) &kp MOD(N6) XXX XXX XXX      XXX XXX XXX XXX XXX XXX XXX XXX
-                                                                 XXX XXX XXX XXX XXX      XXX XXX XXX XXX XXX
+            XXX XXX         &kp MOD(N7) &kp MOD(N8) &kp MOD(N9) XXX                      XXX XXX XXX XXX XXX XXX
+            XXX &kp MOD(N0) &kp MOD(N1) &kp MOD(N2) &kp MOD(N3) XXX                      XXX XXX XXX XXX XXX XXX
+            XXX XXX         &kp MOD(N4) &kp MOD(N5) &kp MOD(N6) XXX XXX XXX      XXX XXX XXX XXX XXX XXX XXX XXX
+                                                        XXX XXX XXX XXX XXX      XXX XXX XXX XXX XXX
             >;
         };
 
