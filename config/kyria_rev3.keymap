@@ -14,6 +14,7 @@
 #define CTRL &bt_sh LCTRL LCTRL
 #define ALT &bt_sh LALT LALT
 #define LANG LA(SPACE)
+#define SNAV_SPACE &b_ssn 2 SPACE
 
 / {
     behaviors {
@@ -45,14 +46,14 @@
             bindings = <&skq>, <&kp>;
         };
         
-        space_nav: space_system_navigation {
+        b_ssn: space_system_navigation {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
             tapping-term-ms = <150>; // duration.short3
             quick-tap-ms = <0>;
             flavor = "tap-preferred";
-            bindings = <&mo 2>, <&kp SPACE>;
+            bindings = <&mo>, <&kp>;
         };
     };
 
@@ -69,7 +70,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // | ESC |  Й  |  Ц  |  У  |  К  |  Е\Ё  |                             |  Н  |   Г   |  Ш  |  Щ  |  З  |  -  |
+        // | ESC |  Й  |  Ц  |  У  |  К  |  Е\Ё  |                             |  Н  |   Г   |  Ш  |  Щ  |  З  |  Х  |
         // |  -  |  Ф  |  Ы  |  В  |  А  |   П   |                             |  Р  |   О   |  Л  |  Д  |  Ж  | RET |
         // |  -  |  Я  |  Ч  |  С  |  М  |   И   |  -  | LANG |    |  -  |  -  |  Т  |  Ь\Ъ  |  Б  |  Ю  |  Э  |  -  |
         //                         |   -   | SPACE\GUI |  --  |    |  -  | SHIFT | REPEAT |
@@ -78,7 +79,7 @@
             &kp ESC &kp Q &kp W &kp E &kp R &kp T                        &kp Y &kp U &kp I     &kp O      &kp P    &kp LBKT
             XXX     &kp A &kp S &kp D &kp F &kp G                        &kp H &kp J &kp K     &kp L      &kp SEMI &kp RET
             XXX     &kp Z &kp X &kp C &kp V &kp B XXX LANG       XXX XXX &kp N &kp M &kp COMMA &kp PERIOD &kp APOS XXX
-                     XXX XXX          XXX &space_nav &mo 1       XXX SHFT &key_repeat               XXX XXX
+                     XXX XXX          XXX SNAV_SPACE &mo 1       XXX SHFT &key_repeat               XXX XXX
             >;
         };
 
