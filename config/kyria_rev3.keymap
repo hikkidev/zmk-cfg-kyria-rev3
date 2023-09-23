@@ -13,7 +13,6 @@
 #define SHFT &bt_sh LSHIFT LSHIFT
 #define CTRL &bt_sh LCTRL LCTRL
 #define ALT &bt_sh LALT LALT
-
 #define LANG LA(SPACE)
 
 / {
@@ -54,19 +53,6 @@
             quick-tap-ms = <0>;
             flavor = "tap-preferred";
             bindings = <&mo 2>, <&kp SPACE>;
-        };
-    };
-
-    macros {
-        mtll: toggle_lang_layer {
-            compatible = "zmk,behavior-macro-one-param";
-            label = "macro_toggle_lang_and_layer";
-            #binding-cells = <1>;
-            bindings = 
-                <&kp CHG_LANG>,
-                <&macro_param_1to1>,
-                <&macro_press &tog MACRO_PLACEHOLDER>
-            ;
         };
     };
 
