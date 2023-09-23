@@ -13,7 +13,7 @@
 #define SHFT &bt_sh LSHIFT LSHIFT
 #define CTRL &bt_sh LCTRL LCTRL
 #define ALT &bt_sh LALT LALT
-#define LANG LA(SPACE)
+#define LANG &kp LA(SPACE)
 #define SNAV_SPACE &b_ssn 2 SPACE
 
 / {
@@ -56,7 +56,7 @@
             bindings = <&mo>, <&kp>;
         };
     };
-
+// DT_N_S_keymap_S_  layer_default  _P_  bindings  _IDX_31_PH_P_label' undeclared here (not in a function)
     combos {
         compatible = "zmk,combos";
         combo_esc {
