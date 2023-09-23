@@ -1,30 +1,20 @@
-/*
- * Copyright (c) 2023 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include "keys_ru.h"
 
 // Layers
-#define L_HOME 0
-#define L_NUM 1
-#define L_SYM 2
-#define L_SYS 3
-#define L_GAME 4
+
 
 // Variables
 #define ___ &trans
 #define XXX &none
 
 #define MOD(keycode) LG(keycode)
-#define SSHFT &bt_sh LSHIFT LSHIFT
-#define SCTRL &bt_sh LCTRL LCTRL
-#define SALT &bt_sh LALT LALT
+#define SHFT &bt_sh LSHIFT LSHIFT
+#define CTRL &bt_sh LCTRL LCTRL
+#define ALT &bt_sh LALT LALT
 
-#define CHG_LANG LA(SPACE)
+#define LANG LA(SPACE)
 
 / {
     behaviors {
@@ -55,6 +45,16 @@
             flavor = "tap-preferred";
             bindings = <&skq>, <&kp>;
         };
+        
+        space_nav: sticky_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>; // duration.short3
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&mo 2>, <&kp SPACE>;
+        };
     };
 
     macros {
@@ -70,48 +70,41 @@
         };
     };
 
+    combos {
+        compatible = "zmk,combos";
+        combo_esc {
+            timeout-ms = <50>;
+            key-positions = <0 1>;
+            bindings = <&kp ESC>;
+            //layers = <0 1...>
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
-        // |  -  |  Й  |  Ц  |  У  |  К  |  Е\Ё  |                            |  Н  |   Г   |  Ш  |  Щ  |  З  |  Х  |
-        // |  -  |  Ф  |  Ы  |  В  |  А  |   П   |                            |  Р  |   О   |  Л  |  Д  |  Ж  |  Э  |
-        // |  -  |  Я  |  Ч  |  С  |  М  |   И   |  -  |  -  |    |  -  |  -  |  Т  |  Ь\Ъ  |  Б  |  Ю  |  -  |  -  |
-
-        layer_home {
+        // | ESC |  Й  |  Ц  |  У  |  К  |  Е\Ё  |                             |  Н  |   Г   | Ш\Щ |  З  |  Х  |  -  |
+        // |  -  |  Ф  |  Ы  |  В  |  А  |   П   |                             |  Р  |   О   |  Л  |  Д  |  Ж  | RET |
+        // |  -  |  Я  |  Ч  |  С  |  М  |   И   |  -  | LANG |    |  -  |  -  |  Т  |  Ь\Ъ  |  Б  |  Ю  |  Э  |  -  |
+        //                         |   -   | SPACE\GUI |  --  |    |  -  | SHIFT | REPEAT |
+        layer_default {
             bindings = <
-            &kp ESC &kp Q &kp W &kp E &kp R &bt_sh GRAVE T                           &kp Y &kp U         &kp I     &kp O   &kp P    &kp LBKT
-            &kp TAB &kp A &kp S &kp D &kp F &kp G                                    &kp H &kp J         &kp K     &kp L   &kp SEMI &kp APOS
-            XXX     &kp Z &kp X &kp C &kp V &kp B &kp CHG_LANG XXX           XXX XXX &kp N &bt_sh RBKT M &kp COMMA &kp DOT &kp FSLH XXX
-                          XXX &mo L_SYS &kp SPACE SSHFT        SCTRL         SCTRL &to L_NUM SALT XXX XXX
+            &kp ESC &kp Q &kp W &kp E &kp R &kp T                        &kp Y &kp U &kp I     &kp O      &kp P    &kp LBKT
+            XXX     &kp A &kp S &kp D &kp F &kp G                        &kp H &kp J &kp K     &kp L      &kp SEMI &kp RET
+            XXX     &kp Z &kp X &kp C &kp V &kp B XXX LANG       XXX XXX &kp N &kp M &kp COMMA &kp PERIOD &kp APOS XXX
+                     XXX XXX          XXX &space_nav &mo 1       XXX SHFT &key_repeat               XXX XXX
             >;
         };
 
-        // |  -  |  -  |  7  |  8  |  9  |  -  |                            |  -  |  -  |  -  |  -  |  BSPC  |  -  |
-        // |  -  |  0  |  1  |  2  |  3  |  =  |                            |  *  |  +  |  *  |  ^  |  RET   |  -  |
-        // |  -  |  -  |  4  |  5  |  6  |  -  |  -  |  -  |    |  -  |  -  |  -  |  -  |  /  |  %  |   -    |  -  |
-
-        layer_numbers {
+        layer_alternative {
             bindings = <
-            ___ XXX    &kp N7 &kp N8 &kp N9 XXX                     XXX      XXX       XXX      XXX       &kp BSPC XXX
-            ___ &kp N0 &kp N1 &kp N2 &kp N3 &kp EQUAL               &kp STAR &kp PLUS  &kp STAR &kp CARET &kp RET  XXX
-            XXX XXX    &kp N4 &kp N5 &kp N6 XXX ___ ___     ___ ___ XXX      &kp MINUS &kp FSLH &kp PRCNT XXX XXX
-                             ___ ___ &to L_HOME ___ ___     ___ &to L_SYM ___ ___ ___
+            XXX XXX XXX XXX XXX &kp GRAVE                XXX XXX      &kp O XXX &kp LBKT XXX
+            XXX XXX XXX XXX XXX XXX                      XXX XXX      XXX   XXX XXX      XXX
+            XXX XXX XXX XXX XXX XXX XXX XXX      XXX XXX XXX &kp RBKT XXX   XXX XXX      XXX
+                        XXX XXX XXX XXX XXX      XXX XXX XXX XXX XXX
             >;
         };
 
-        // |  -  |  -  |  ]  |  }  |  )  |  -  |                            |  -  |  -  |  -  |  -  |   BSPC     |  -  |
-        // |  -  |  -  |  [  |  {  |  (  | '|" |                            |  !  |  =  |  @  |  $  |    RET     |  -  |
-        // |  -  |  #  |  *  |  +  |  -  |  -  |  -  |  -  |    |  -  |  -  |  -  |  %  |  ^  |  &  | UNDERSCORE |  -  |
-
-        layer_symbols {
-            bindings = <
-               XXX XXX      &kp RBKT &kp RBRC &kp RPAR  XXX                                     XXX      XXX       XXX       XXX      &kp BSPC  XXX
-               XXX XXX      &kp LBKT &kp LBRC &kp LPAR  &bt_sh DQT APOS                     &kp EXCL &kp EQUAL &kp AT    &kp DLLR &kp RET   XXX
-               XXX &kp HASH &kp STAR &kp PLUS &kp MINUS XXX                 ___ ___     ___ ___ XXX &kp PRCNT &kp CARET &kp AMPS &kp UNDER XXX
-                                                         ___ ___ &to L_HOME ___ ___     ___ &to L_NUM ___ ___ ___
-            >;
-        };
- 
         layer_system_nav {
             bindings = <
             &kp CHG_LANG XXX         &kp MOD(N7) &kp MOD(N8) &kp MOD(N9) XXX                      XXX XXX XXX XXX XXX XXX
