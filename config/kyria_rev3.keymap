@@ -46,7 +46,7 @@
             bindings = <&skq>, <&kp>;
         };
         
-        space_nav: sticky_hold_tap {
+        space_nav: space_system_navigation {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
@@ -83,7 +83,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // | ESC |  Й  |  Ц  |  У  |  К  |  Е\Ё  |                             |  Н  |   Г   | Ш\Щ |  З  |  Х  |  -  |
+        // | ESC |  Й  |  Ц  |  У  |  К  |  Е\Ё  |                             |  Н  |   Г   |  Ш  |  Щ  |  З  |  -  |
         // |  -  |  Ф  |  Ы  |  В  |  А  |   П   |                             |  Р  |   О   |  Л  |  Д  |  Ж  | RET |
         // |  -  |  Я  |  Ч  |  С  |  М  |   И   |  -  | LANG |    |  -  |  -  |  Т  |  Ь\Ъ  |  Б  |  Ю  |  Э  |  -  |
         //                         |   -   | SPACE\GUI |  --  |    |  -  | SHIFT | REPEAT |
