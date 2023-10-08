@@ -74,7 +74,7 @@
         * tap:        е
         * double-tap: ё
         */
-        ru_ie_io: ru_sign_double_tap {
+        ru_ie_io: ru_ie_double_tap {
             compatible = "zmk,behavior-tap-dance";
             label = "RU_IE_OR_IO";
             #binding-cells = <0>;
@@ -86,7 +86,7 @@
         * tap:        ш
         * double-tap: щ
         */
-        ru_sha_scha: ru_sign_double_tap {
+        ru_sha_scha: ru_sha_double_tap {
             compatible = "zmk,behavior-tap-dance";
             label = "RU_SHA_OR_SHCHA";
             #binding-cells = <0>;
