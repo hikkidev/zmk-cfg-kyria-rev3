@@ -2,23 +2,31 @@
 #include <dt-bindings/zmk/keys.h>
 #include "keys_ru.h"
 
-// Layers
-
-
-// Variables
+// KB
 #define ___ &trans
 #define XXX &none
 
+// OS Hotkeys
 #define MOD(keycode) LG(keycode)
-#define SHFT &bt_sh LSHIFT LSHIFT
-#define CTRL &bt_sh LCTRL LCTRL
-#define ALT &bt_sh LALT LALT
+#define OS_EN MOD(LA(N1))
+#define OS_RU MOD(LA(N2))
+
+// Layer Alias
+#define L_CHARS_EN &slto OS_EN L_EN
+#define L_CHARS_RU &slto OS_RU L_RU
+
+//unused
+#define SHFT &b_sht LSHIFT LSHIFT
+#define CTRL &b_sht LCTRL LCTRL
+#define ALT &b_sht LALT LALT
 #define LANG &kp LA(SPACE)
-#define SNAV_SPACE &b_ssn 2 SPACE
+#define SNAV_SPACE &kph 2 SPACE
 
 / {
     behaviors {
-        skq: sticky_key_quick_release {
+
+        //unused
+        b_skqr: sticky_key_quick_release {
             compatible = "zmk,behavior-sticky-key";
             label = "STICKY_KEY_QUICK_RELEASE";
             #binding-cells = <1>;
@@ -28,25 +36,19 @@
             ignore-modifiers;
         };
 
-        td_mt: tap_dance_mod_tap {
-            compatible = "zmk,behavior-tap-dance";
-            label = "TAP_DANCE_0";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>; // duration.short4
-            bindings = <&mt LC(C) C>, <&kp LS(C)>;
-        };
-
-        bt_sh: sticky_hold_tap {
+        //unused
+        b_sht: sticky_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
             tapping-term-ms = <150>; // duration.short3
             quick-tap-ms = <0>;
             flavor = "tap-preferred";
-            bindings = <&skq>, <&kp>;
+            bindings = <&kp>, <&b_skqr>;
         };
-        
-        b_ssn: space_system_navigation {
+
+        //unused
+        kph: space_system_navigation {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
@@ -55,8 +57,78 @@
             flavor = "tap-preferred";
             bindings = <&mo>, <&kp>;
         };
+
+        /**
+        * tap:        ь
+        * double-tap: ъ
+        */
+        ru_sign: ru_sign_double_tap {
+            compatible = "zmk,behavior-tap-dance";
+            label = "RU_SOFT_OR_HARD_SIGN";
+            #binding-cells = <0>;
+            tapping-term-ms = <150>; // duration.short3
+            bindings = <&kp RU_SSIGN>, <&kp RU_HSIGN>;
+        };
+
+        /**
+        * tap:        е
+        * double-tap: ё
+        */
+        ru_ie_io: ru_sign_double_tap {
+            compatible = "zmk,behavior-tap-dance";
+            label = "RU_IE_OR_IO";
+            #binding-cells = <0>;
+            tapping-term-ms = <150>; // duration.short3
+            bindings = <&kp RU_IE>, <&kp RU_IO>;
+        };
+
+        /**
+        * tap:        ш
+        * double-tap: щ
+        */
+        ru_sha_scha: ru_sign_double_tap {
+            compatible = "zmk,behavior-tap-dance";
+            label = "RU_SHA_OR_SHCHA";
+            #binding-cells = <0>;
+            tapping-term-ms = <150>; // duration.short3
+            bindings = <&kp RU_SHA>, <&kp RU_SHCHA>;
+        };
     };
-// DT_N_S_keymap_S_  layer_default  _P_  bindings  _IDX_31_PH_P_label' undeclared here (not in a function)
+
+    macros {
+        /**
+        * Params:
+        *  1. OS Language alias
+        *  2. KB Layer alias
+        *
+        * Example:
+        *  `&slto OS_EN L_EN`
+        */
+        slto: select_lang_and_go_to_layer {
+            label = "SYNC_LANG_AND_LAYER";
+            compatible = "zmk,behavior-macro-two-param";
+            wait-ms = <32>;
+            tap-ms = <32>;
+            #binding-cells = <2>;
+            bindings
+                = 
+                <&macro_param_1to1>,
+                <&macro_tap &kp MACRO_PLACEHOLDER>,
+                <&macro_wait_time 32>,
+                <&macro_param_2to1>,
+                <&macro_tap &to MACRO_PLACEHOLDER>,
+                ;
+        };
+    };
+
+    /*                            KEY POSITIONS
+    ╭────────────────────────╮                 ╭────────────────────────╮
+    │  0   1   2   3   4   5 │                 │  6   7   8   9  10  11 │
+    │ 12  13  14  15  16  17 ╰───────╮ ╭───────╯ 18  19  20  21  22  23 │
+    │ 24  25  26  27  28  29  30  31 │ │ 32  33  34  35  36  37  38  39 │
+    ╰───────────╮ 40  41  42  43  44 │ │ 45  46  47  48  49 ╭───────────╯
+                ╰────────────────────╯ ╰────────────────────╯            */
+/*
     combos {
         compatible = "zmk,combos";
         combo_esc {
@@ -66,38 +138,53 @@
             //layers = <0 1...>
         };
     };
+*/
 
     keymap {
         compatible = "zmk,keymap";
 
-        // | ESC |  Й  |  Ц  |  У  |  К  |  Е\Ё  |                             |  Н  |   Г   |  Ш  |  Щ  |  З  |  Х  |
-        // |  -  |  Ф  |  Ы  |  В  |  А  |   П   |                             |  Р  |   О   |  Л  |  Д  |  Ж  | RET |
-        // |  -  |  Я  |  Ч  |  С  |  М  |   И   |  -  | LANG |    |  -  |  -  |  Т  |  Ь\Ъ  |  Б  |  Ю  |  Э  |  -  |
-        //                         |   -   | SPACE\GUI |  --  |    |  -  | SHIFT | REPEAT |
-        layer_default {
+        layer_en {
+            label = "L_EN";
             bindings = <
-            &kp ESC &kp Q &kp W &kp E &kp R &kp T                        &kp Y &kp U &kp I     &kp O      &kp P    &kp LBKT
-            XXX     &kp A &kp S &kp D &kp F &kp G                        &kp H &kp J &kp K     &kp L      &kp SEMI &kp RET
-            XXX     &kp Z &kp X &kp C &kp V &kp B XXX LANG       XXX XXX &kp N &kp M &kp COMMA &kp PERIOD &kp APOS XXX
-                     XXX XXX          XXX SNAV_SPACE &mo 1       XXX SHFT &key_repeat               XXX XXX
+                // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
+                    XXX &kp Q         &kp W         &kp E         &kp R         &kp T                                                                     &kp Y         &kp U         &kp I         &kp O         &kp P         XXX  
+                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
+                    XXX &kp A         &kp S         &kp D         &kp F         &kp G                                                                     &kp H         &kp J         &kp K         &kp L         &kp SEMI      XXX  
+                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
+                    XXX &kp Z         &kp X         &kp C         &kp V         &kp B         L_CHARS_EN    L_CHARS_RU        &kp X         &kp X         &kp N         &kp M         &kp COMMA     &kp DOT       &kp APOS      XXX  
+                // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
+                                                              XXX XXX           &kp X         &kp X         &kp X             &kp X         &kp X         &kp X         L_CHARS_RU    XXX
+                //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
             >;
         };
 
-        layer_alternative {
+        layer_ru {
+            label = "L_RU";
             bindings = <
-            XXX XXX XXX XXX XXX &kp GRAVE                XXX XXX      &kp O XXX &kp LBKT XXX
-            XXX XXX XXX XXX XXX XXX                      XXX XXX      XXX   XXX XXX      XXX
-            XXX XXX XXX XXX XXX XXX XXX XXX      XXX XXX XXX &kp RBKT XXX   XXX XXX      XXX
-                        XXX XXX XXX XXX XXX      XXX XXX XXX XXX XXX
+                // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
+                    XXX &kp RU_SI     &kp RU_TSE    &kp RU_U      &kp RU_KA     &ru_ie_io                                                                 &kp RU_EN     &kp RU_GHE    &ru_sha_scha  &kp RU_ZE     &kp RU_HA     XXX  
+                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
+                    XXX &kp RU_EF     &kp RU_YERU   &kp RU_VE     &kp RU_A      &kp RU_PE                                                                 &kp RU_ER     &kp RU_O      &kp RU_EL     &kp RU_DE     &kp RU_ZHE    XXX  
+                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
+                    XXX &kp RU_YA     &kp RU_CHE    &kp RU_ES     &kp RU_EM     &kp RU_I      ___           ___               &kp X         &kp X         &kp RU_TE     &ru_sign      &kp RU_BE     &kp RU_YU     &kp RU_E      XXX  
+                // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
+                                                              XXX L_CHARS_EN    &kp X         &kp X         &kp X             &kp X         &kp X         &kp X         XXX           XXX
+                //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
             >;
         };
 
-        layer_system_nav {
+        layer_symbols {
+            label = "L_SYM";
             bindings = <
-            XXX XXX         &kp MOD(N7) &kp MOD(N8) &kp MOD(N9) XXX                      XXX XXX XXX XXX XXX XXX
-            XXX &kp MOD(N0) &kp MOD(N1) &kp MOD(N2) &kp MOD(N3) XXX                      XXX XXX XXX XXX XXX XXX
-            XXX XXX         &kp MOD(N4) &kp MOD(N5) &kp MOD(N6) XXX XXX XXX      XXX XXX XXX XXX XXX XXX XXX XXX
-                                                        XXX XXX XXX XXX XXX      XXX XXX XXX XXX XXX
+                // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
+                    XXX &kp GRAVE     &kp APOS      &kp AT_SIGN   &kp PLUS      &kp CARET                                                                 &kp RBKT      &kp SEMI      &kp AMPS      &kp PRCNT     &kp PIPE      XXX  
+                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
+                    XXX &kp LBKT      &kp LPAR      &kp MINUS     &kp GT        &kp COMMA                                                                 &kp COLON     &kp QMARK     &kp DOT       &kp RPAR      &kp RBKT      XXX  
+                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
+                    XXX &kp BSLH      &kp HASH      &kp DLLR      &kp LBRC      &kp DQT       ___           ___               &kp X         &kp X         &kp LT        &kp EXCL      &kp EQUAL     &kp FSLH      &kp STAR      XXX  
+                // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
+                                                              XXX L_CHARS_EN    &kp X         &kp X         &kp X             &kp X         &kp X         &kp X         L_CHARS_RU    XXX
+                //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
             >;
         };
 
@@ -109,25 +196,5 @@
                                         &kp Z  &kp X  &kp C &kp LCTRL &kp SPACE   &kp V &kp B &kp N  &kp M          XXX
              >;
         };
-
-        // LAYER TEMPLATES
-
-        // layer_name {
-        //     bindings = <
-        //     ___ ___ ___ ___ ___ ___                      ___ ___ ___ ___ ___ ___
-        //     ___ ___ ___ ___ ___ ___                      ___ ___ ___ ___ ___ ___
-        //     ___ ___ ___ ___ ___ ___ ___ ___      ___ ___ ___ ___ ___ ___ ___ ___
-        //                 ___ ___ ___ ___ ___      ___ ___ ___ ___ ___
-        //     >;
-        // };
-
-        // layer_name {
-        //     bindings = <
-        //     XXX XXX XXX XXX XXX XXX                      XXX XXX XXX XXX XXX XXX
-        //     XXX XXX XXX XXX XXX XXX                      XXX XXX XXX XXX XXX XXX
-        //     XXX XXX XXX XXX XXX XXX XXX XXX      XXX XXX XXX XXX XXX XXX XXX XXX
-        //                 XXX XXX XXX XXX XXX      XXX XXX XXX XXX XXX
-        //     >;
-        // };
     };
 };
