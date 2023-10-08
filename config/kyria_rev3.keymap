@@ -116,7 +116,7 @@
                 <&macro_tap &kp MACRO_PLACEHOLDER>,
                 <&macro_wait_time 32>,
                 <&macro_param_2to1>,
-                <&macro_tap &to MACRO_PLACEHOLDER>,
+                <&macro_tap &to MACRO_PLACEHOLDER>
                 ;
         };
     };
