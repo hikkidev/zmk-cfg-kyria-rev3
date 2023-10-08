@@ -12,6 +12,8 @@
 #define OS_RU MOD(LA(N2))
 
 // Layer Alias
+#define L_EN 0
+#define L_RU 1
 #define L_CHARS_EN &slto OS_EN L_EN
 #define L_CHARS_RU &slto OS_RU L_RU
 
@@ -144,7 +146,6 @@
         compatible = "zmk,keymap";
 
         layer_en {
-            label = "L_EN";
             bindings = <
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
                     XXX &kp Q         &kp W         &kp E         &kp R         &kp T                                                                     &kp Y         &kp U         &kp I         &kp O         &kp P         XXX  
@@ -159,7 +160,6 @@
         };
 
         layer_ru {
-            label = "L_RU";
             bindings = <
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
                     XXX &kp RU_SI     &kp RU_TSE    &kp RU_U      &kp RU_KA     &ru_ie_io                                                                 &kp RU_EN     &kp RU_GHE    &ru_sha_scha  &kp RU_ZE     &kp RU_HA     XXX  
@@ -174,7 +174,6 @@
         };
 
         layer_symbols {
-            label = "L_SYM";
             bindings = <
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
                     XXX &kp GRAVE     &kp APOS      &kp AT_SIGN   &kp PLUS      &kp CARET                                                                 &kp RBKT      &kp SEMI      &kp AMPS      &kp PRCNT     &kp PIPE      XXX  
