@@ -19,11 +19,10 @@
 #define L_SYM 2
 #define L_NUM 3
 
-#define CHARS_EN &slto OS_NEXT_LANG L_EN
-#define CHARS_RU &slto OS_NEXT_LANG L_RU
+#define CHARS_EN &slto OS_EN L_EN
+#define CHARS_RU &slto OS_RU L_RU
 #define SYMBOLS &to L_SYM
 #define NUMBERS &to L_NUM
-
 
 //unused
 #define SHFT &b_sht LSHIFT LSHIFT
@@ -102,6 +101,54 @@
             #binding-cells = <0>;
             tapping-term-ms = <150>; // duration.short3
             bindings = <&kp RU_SHA>, <&kp RU_SHCHA>;
+        };
+
+        /**
+        * tap:        (
+        * double-tap: )
+        */
+        par_lr: parenthesis_left_right {
+            compatible = "zmk,behavior-tap-dance";
+            label = "parenthesis_left_right";
+            #binding-cells = <0>;
+            tapping-term-ms = <150>; // duration.short3
+            bindings = <&kp LPAR>, <&kp RPAR>;
+        };
+
+       /**
+        * tap:        [
+        * double-tap: ]
+        */
+        bkt_lr: bracket_left_right {
+            compatible = "zmk,behavior-tap-dance";
+            label = "bracket_left_right";
+            #binding-cells = <0>;
+            tapping-term-ms = <150>; // duration.short3
+            bindings = <&kp LBKT>, <&kp RBKT>;
+        };
+
+       /**
+        * tap:        {
+        * double-tap: }
+        */
+        brc_lr: brace_left_right {
+            compatible = "zmk,behavior-tap-dance";
+            label = "brace_left_right";
+            #binding-cells = <0>;
+            tapping-term-ms = <150>; // duration.short3
+            bindings = <&kp LBRC>, <&kp RBRC>;
+        };
+
+       /**
+        * tap:        >
+        * double-tap: <
+        */
+        than_gl: greater_or_less_than {
+            compatible = "zmk,behavior-tap-dance";
+            label = "brace_left_right";
+            #binding-cells = <0>;
+            tapping-term-ms = <150>; // duration.short3
+            bindings = <&kp GT>, <&kp LT>;
         };
     };
 
@@ -184,11 +231,11 @@
         layer_symbols {
             bindings = <
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
-                    XXX &kp GRAVE     &kp APOS      &kp AT_SIGN   &kp PLUS      &kp CARET                                                                 &kp RBKT      &kp SEMI      &kp AMPS      &kp PRCNT     &kp PIPE      XXX  
+                    XXX &kp GRAVE     &kp APOS      &kp AT_SIGN   &kp PLUS      &kp CARET                                                                 XXX           &kp SEMI      &kp AMPS      &kp PRCNT     &kp PIPE      XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp LBKT      &kp LPAR      &kp MINUS     &kp GT        &kp COMMA                                                                 &kp COLON     &kp QMARK     &kp DOT       &kp RPAR      &kp RBKT      XXX  
+                    XXX &bkt_lr       &par_lr       &kp MINUS     &than_gl      &kp COMMA                                                                 &kp COLON     &kp QMARK     &kp DOT       XXX           XXX           XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp BSLH      &kp HASH      &kp DLLR      &kp LBRC      &kp DQT          CHARS_EN     CHARS_RU        XXX              NUMBERS    &kp LT        &kp EXCL      &kp EQUAL     &kp FSLH      &kp STAR      XXX  
+                    XXX &kp BSLH      &kp HASH      &kp DLLR      &brc_lr       &kp DQT          CHARS_EN     CHARS_RU        XXX              NUMBERS    XXX           &kp EXCL      &kp EQUAL     &kp FSLH      &kp STAR      XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
                                                               XXX ___           ___           ___           ___               ___           ___           ___           ___           XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
@@ -198,11 +245,11 @@
         layer_numbers {
             bindings = <
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
-                    XXX &kp KP_MULTIPLY &kp N7      &kp N8        &kp N9        &kp KP_PLUS                                                               &kp KP_DOT    &kp KP_COMMA   XXX          XXX           XXX          XXX  
+                    XXX &kp STAR      &kp N7        &kp N8        &kp N9        &kp PLUS                                                                  XXX           XXX           XXX           XXX           XXX           XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp N0          &kp N4      &kp N5        &kp N6        &kp KP_EQUAL                                                              &kp DOT       &kp COMMA     &kp FSLH      XXX           XXX          XXX  
+                    XXX &kp N0        &kp N4        &kp N5        &kp N6        &kp EQUAL                                                                 &kp HOME      &kp LEFT      &kp UP        &kp RIGHT     &kp END       XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp KP_DIVIDE   &kp N1      &kp N2        &kp N3        &kp KP_MINUS     CHARS_EN     CHARS_RU           SYMBOLS    XXX           XXX           XXX           &kp QUESTION  XXX           XXX          XXX  
+                    XXX &kp FSLH      &kp N1        &kp N2        &kp N3        &kp MINUS        CHARS_EN     CHARS_RU           SYMBOLS    XXX           XXX           &kp PG_UP     &kp DOWN      &kp PG_DN     XXX           XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
                                                               XXX ___           ___           ___           ___               ___           ___           ___           ___           XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
@@ -210,19 +257,7 @@
         };
 
 /*
-        layer_numbers {
-            bindings = <
-                // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
-                    XXX &kp KP_MULTIPLY &kp N7      &kp N8        &kp N9        &kp KP_PLUS                                                               XXX           XXX           XXX           XXX           XXX          XXX  
-                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp N0          &kp N4      &kp N5        &kp N6        &kp KP_EQUAL                                                              XXX           XXX           XXX           XXX           XXX          XXX  
-                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp KP_DIVIDE   &kp N1      &kp N2        &kp N3        &kp KP_MINUS     CHARS_EN     CHARS_RU           SYMBOLS    XXX           XXX           XXX           XXX           XXX           XXX          XXX  
-                // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
-                                                              XXX ___           ___           ___           ___               ___           ___           ___           ___           XXX
-                //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
-            >;
-        };
+
 
 
         layer_games_qwerty {
@@ -236,3 +271,22 @@
 */
     };
 };
+
+/*
+-----
+
+~_
+
+
+
+`'@+^
+[(->,
+\#${"
+
+];&%|
+:?.)]
+<!=/*
+
+-----
+*/
+
