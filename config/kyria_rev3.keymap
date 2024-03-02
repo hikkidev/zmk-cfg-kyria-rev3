@@ -44,6 +44,7 @@
 #define CHAIN_CTRL &skc LCTRL
 #define CHAIN_SHIFT &skc LSHIFT
 #define CHAIN_ALT &skc LALT
+#define CHAIN_CMD &skc OS_CMD
 
 #define CTRL_OR_SHIFT &hst LSHIFT LCTRL
 
@@ -65,9 +66,11 @@
     layers = <LAYERS>; \
 };
 
-
 / {
     behaviors {
+        /**
+        * A sticky key stays pressed until another key is pressed.
+        */
         skc: sticky_key_chain {
             compatible = "zmk,behavior-sticky-key";
             #binding-cells = <1>;
@@ -76,6 +79,10 @@
             ignore-modifiers;
         };
 
+        /**
+        * A sticky key stays pressed until another key is pressed.
+        * No the ability to chain modifiers (reason: quick-release)
+        */
         skq: sticky_key_quick_release {
             compatible = "zmk,behavior-sticky-key";
             #binding-cells = <1>;
@@ -85,6 +92,12 @@
             ignore-modifiers;
         };
 
+		/**
+        * tap: triggers `sticky_key_quick_release`
+        * hold: triggers a <&kp> behavior
+        * Example:
+        *   `CTRL_OR_SHIFT`
+        */
         hst: hold_sticky_tap_quick_release {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -94,10 +107,14 @@
             bindings = <&kp>, <&skq>;
         };
 
+		/**
+        * tap: triggers a <&kp> behavior
+        * hold: triggers momentary layer behavior
+        */
         hmot: hold_momentary_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <100>; // duration.short2
+            tapping-term-ms = <250>;
             quick-tap-ms = <0>;
             flavor = "tap-preferred";
             bindings = <&mo>, <&kp>;
@@ -338,7 +355,7 @@
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
                     XXX XXX           XXX           XXX           XXX           XXX                                                                       XXX           XXX           XXX           XXX           XXX           XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX XXX           NUMBERS       SYMBOLS       CHARS_EN      CHARS_RU                                                                  CHARS_EN      CHARS_RU      SYMBOLS       NUMBERS       XXX           XXX  
+                    XXX XXX           CHARS_RU      SYMBOLS       NUMBERS       CHARS_EN                                                                  CHARS_EN      NUMBERS       SYMBOLS       CHARS_RU       XXX          XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
                     XXX XXX           XXX           XXX           XXX           XXX           XXX           XXX               XXX           XXX           XXX           XXX           XXX           XXX           XXX           XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
@@ -352,7 +369,7 @@
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
                     XXX &kp ESC       XXX           XXX           XXX           XXX                                                                       XXX           XXX           XXX           XXX           XXX           XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX XXX           CHAIN_CTRL    CHAIN_ALT     CHAIN_SHIFT   &kp TAB                                                                   &kp HOME      &kp LEFT      &kp UP        &kp RIGHT     &kp END       XXX  
+                    XXX CHAIN_CMD     CHAIN_CTRL    CHAIN_ALT     CHAIN_SHIFT   &kp TAB                                                                   &kp HOME      &kp LEFT      &kp UP        &kp RIGHT     &kp END       XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
                     XXX XXX           XXX           XXX           XXX           XXX           XXX           XXX               XXX           XXX           XXX           &kp PG_UP     &kp DOWN      &kp PG_DN     XXX           XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
