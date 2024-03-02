@@ -41,9 +41,9 @@
 
 #define MOD_AND_SYS_NAV &mom L_SYS_NAV OSM
 
-#define SHFT &skqht LSHIFT LSHIFT
-#define CTRL &skqht LCTRL LCTRL
-#define ALT &skqht LALT LALT
+#define SHFT &skq LSHIFT
+#define CTRL &skq LCTRL
+#define ALT &skq LALT
 
 
 / {
