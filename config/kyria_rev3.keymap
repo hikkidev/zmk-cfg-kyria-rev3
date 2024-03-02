@@ -9,8 +9,8 @@
 
 // OS Hotkeys
 
-// GUI (Windows / Command / Meta)
-#define GUI LGUI
+// KbGUI (Windows / Command / Meta)
+#define OSM LGUI
 #define MOD(keycode) LG(keycode)
 
 #define OS_EN MOD(LA(N1))
@@ -38,7 +38,7 @@
 #define ENTER_OS_NAV &os_nav ENTER
 
 
-#define GUI_AND_SYS_NAV &mom L_SYS_NAV GUI
+#define MOD_AND_SYS_NAV &mom L_SYS_NAV OSM
 
 #define SHFT &skqht LSHIFT LSHIFT
 #define CTRL &skqht LCTRL LCTRL
@@ -85,7 +85,7 @@
             tapping-term-ms = <100>; // duration.short2
             quick-tap-ms = <0>;
             flavor = "tap-preferred";
-            bindings = <GUI_AND_SYS_NAV>, <&kp>;
+            bindings = <MOD_AND_SYS_NAV>, <&kp>;
         };
 
         /**
