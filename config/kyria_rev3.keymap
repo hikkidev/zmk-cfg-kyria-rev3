@@ -255,11 +255,15 @@
         COMBO(comma_en, &kp COMMA, 15 20, L_EN)
         COMBO(qmark_en, &kp QMARK, 15 16, L_EN)
         COMBO(double_quotes_en, &kp DQT, 28 29, L_EN)
+        COMBO(colon_en, &kp COLON, 18 19, L_EN)
+        COMBO(semicolon_en, &kp SEMI, 34 35, L_EN)
 
         COMBO(dot_ru, &kp FSLH, 16 19, L_RU)
         COMBO(comma_ru, &kp QMARK, 15 20, L_RU)
         COMBO(qmark_ru, &kp AMPS, 15 16, L_RU)
         COMBO(double_quotes_ru, &kp AT_SIGN, 28 29, L_RU)
+        COMBO(colon_ru, &kp CARET, 18 19, L_RU)
+        COMBO(semicolon_ru, &kp DOLLAR, 34 35, L_RU)
     };
 
     keymap {
