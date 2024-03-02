@@ -43,6 +43,7 @@
 #define CTRL &skq LCTRL
 #define SHIFT &skq LSHIFT
 #define ALT &skq LALT
+#define CTRL_OR_SHIFT &hst LSHIFT LCTRL
 
 #define COMBO_GLOBAL(NAME, BINDINGS, KEYPOS) \
   combo_##NAME { \
@@ -71,8 +72,7 @@
             ignore-modifiers;
         };
 
-		// unused
-        skqht: sticky_hold_tap {
+        hst: hold_sticky_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <100>; // duration.short2
@@ -80,7 +80,7 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&skq>;
         };
-  
+
         hmot: hold_momentary_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -89,15 +89,6 @@
             flavor = "tap-preferred";
             bindings = <&mo>, <&kp>;
         };
-
-        // os_nav: system_nav_layer_with_mod_tap {
-        //     compatible = "zmk,behavior-hold-tap";
-        //     #binding-cells = <1>;
-        //     tapping-term-ms = <100>; // duration.short2
-        //     quick-tap-ms = <0>;
-        //     flavor = "tap-preferred";
-        //     bindings = <OS_NAV_CMD>, <&kp>;
-        // };
 
         /**
         * tap:        ь
@@ -248,22 +239,26 @@
 
     combos {
         compatible = "zmk,combos";
-        
+
         COMBO(excl, &kp EXCL, 19 20, L_EN L_RU)
 
-        COMBO(dot_en, &kp DOT, 16 19, L_EN)
-        COMBO(comma_en, &kp COMMA, 15 20, L_EN)
         COMBO(qmark_en, &kp QMARK, 15 16, L_EN)
-        COMBO(double_quotes_en, &kp DQT, 28 29, L_EN)
-        COMBO(colon_en, &kp COLON, 18 19, L_EN)
-        COMBO(semicolon_en, &kp SEMI, 34 35, L_EN)
-
-        COMBO(dot_ru, &kp FSLH, 16 19, L_RU)
-        COMBO(comma_ru, &kp QMARK, 15 20, L_RU)
         COMBO(qmark_ru, &kp AMPS, 15 16, L_RU)
-        COMBO(double_quotes_ru, &kp AT_SIGN, 28 29, L_RU)
-        COMBO(colon_ru, &kp CARET, 18 19, L_RU)
-        COMBO(semicolon_ru, &kp DOLLAR, 34 35, L_RU)
+
+        COMBO(colon_en, &kp COLON, 16 17, L_EN)
+        COMBO(colon_ru, &kp CARET, 16 17, L_RU)
+
+        COMBO(semicolon_en, &kp SEMI, 18 19, L_EN)
+        COMBO(semicolon_ru, &kp DOLLAR, 18 19, L_RU)
+
+        COMBO(dot_en, &kp DOT, 16 19, L_EN)
+        COMBO(dot_ru, &kp FSLH, 16 19, L_RU)
+
+        COMBO(comma_en, &kp COMMA, 15 20, L_EN)
+        COMBO(comma_ru, &kp QMARK, 15 20, L_RU)
+
+        COMBO(double_quotes_en, &kp DQT, 17 18, L_EN)
+        COMBO(double_quotes_ru, &kp AT_SIGN, 17 18, L_RU)
     };
 
     keymap {
@@ -278,7 +273,7 @@
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
                     XXX &kp Z         &kp X         &kp C         &kp V         &kp B         XXX           XXX               XXX           XXX           &kp N         &kp M         XXX           XXX           &bt BT_CLR    XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
-                                                              XXX &kp INSERT    &kp ENTER     SPACE_KB_NAV  OS_NAV_CMD        &key_repeat   KB_MOD        &kp BACKSPACE &kp DEL       XXX
+                                                              XXX OS_NAV_CMD    CTRL_OR_SHIFT SPACE_KB_NAV  &kp ENTER         &key_repeat   KB_MOD        &kp BACKSPACE &kp DEL       XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
             >;
         };
@@ -325,7 +320,7 @@
             >;
         };
 
-        layer_kb_navigation {
+       layer_kb_navigation {
             bindings = <
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
                     XXX XXX           XXX           XXX           XXX           XXX                                                                       XXX           XXX           XXX           XXX           XXX           XXX  
@@ -342,11 +337,11 @@
         layer_kb_modifiers {
             bindings = <
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
-                    XXX &kp ESC       XXX           XXX           XXX           XXX                                                                       XXX           XXX           XXX           XXX           &kp ESC       XXX  
+                    XXX &kp ESC       XXX           XXX           XXX           XXX                                                                       XXX           XXX           XXX           XXX           XXX           XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX XXX           ALT           CTRL          SHIFT         &kp TAB                                                                   &kp TAB       SHIFT         CTRL          ALT           XXX           XXX  
+                    XXX XXX           ALT           CTRL          SHIFT         &kp TAB                                                                   &kp HOME      &kp LEFT      &kp UP        &kp RIGHT     &kp END       XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX XXX           XXX           XXX           XXX           XXX           XXX           XXX               XXX           XXX           XXX           XXX           XXX           XXX           XXX           XXX  
+                    XXX XXX           XXX           XXX           XXX           XXX           XXX           XXX               XXX           XXX           XXX           &kp PG_UP     &kp DOWN      &kp PG_DN     XXX           XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
                                                               XXX XXX           XXX           XXX           XXX               XXX           XXX           XXX           XXX           XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
