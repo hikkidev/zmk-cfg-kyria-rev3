@@ -35,8 +35,10 @@
 #define CHARS_RU &slto OS_RU L_RU
 #define SYMBOLS &to L_SYM
 #define NUMBERS &to L_NUM
+
 #define SPACE_KB_NAV &hmot L_KB_NAV SPACE
-#define KB_MOD &mo L_KB_MOD
+#define BSPC_KB_MOD &hmot L_KB_MOD BACKSPACE
+
 #define OS_NAV_CMD &mom L_OS_NAV OS_CMD
 
 
@@ -273,7 +275,7 @@
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
                     XXX &kp Z         &kp X         &kp C         &kp V         &kp B         XXX           XXX               XXX           XXX           &kp N         &kp M         XXX           XXX           &bt BT_CLR    XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
-                                                              XXX OS_NAV_CMD    CTRL_OR_SHIFT SPACE_KB_NAV  &kp ENTER         &key_repeat   KB_MOD        &kp BACKSPACE &kp DEL       XXX
+                                                              XXX OS_NAV_CMD    CTRL_OR_SHIFT SPACE_KB_NAV  &kp ENTER         &key_repeat   BSPC_KB_MOD   &kp DEL       XXX           XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
             >;
         };
