@@ -35,7 +35,8 @@
 #define NUMBERS &to L_NUM
 #define KB_NAV &mo L_KB_NAV
 #define SPACE_KB_NAV &hmot L_KB_NAV SPACE
-#define ENTER_OS_NAV &os_nav ENTER
+
+//#define ENTER_OS_NAV &os_nav ENTER
 
 
 #define MOD_AND_SYS_NAV &mom L_SYS_NAV OSM
@@ -50,7 +51,6 @@
 
         skq: sticky_key_quick_release {
             compatible = "zmk,behavior-sticky-key";
-            label = "STICKY_KEY_QUICK_RELEASE";
             #binding-cells = <1>;
             bindings = <&kp>;
             release-after-ms = <700>; // duration.extra-long1
@@ -60,7 +60,6 @@
 
         skqht: sticky_hold_tap {
             compatible = "zmk,behavior-hold-tap";
-            label = "HOMEROW_MODS";
             #binding-cells = <2>;
             tapping-term-ms = <100>; // duration.short2
             quick-tap-ms = <0>;
@@ -70,7 +69,6 @@
   
         hmot: hold_momentary_layer_tap {
             compatible = "zmk,behavior-hold-tap";
-            label = "CUSTOM_LAYER_TAP";
             #binding-cells = <2>;
             tapping-term-ms = <100>; // duration.short2
             quick-tap-ms = <0>;
@@ -78,15 +76,14 @@
             bindings = <&mo>, <&kp>;
         };
 
-        os_nav: system_nav_layer_with_mod_tap {
-            compatible = "zmk,behavior-hold-tap";
-            label = "CUSTOM_LAYER_TAP";
-            #binding-cells = <1>;
-            tapping-term-ms = <100>; // duration.short2
-            quick-tap-ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <MOD_AND_SYS_NAV>, <&kp>;
-        };
+        // os_nav: system_nav_layer_with_mod_tap {
+        //     compatible = "zmk,behavior-hold-tap";
+        //     #binding-cells = <1>;
+        //     tapping-term-ms = <100>; // duration.short2
+        //     quick-tap-ms = <0>;
+        //     flavor = "tap-preferred";
+        //     bindings = <MOD_AND_SYS_NAV>, <&kp>;
+        // };
 
         /**
         * tap:        ь
@@ -180,7 +177,7 @@
         *  2. KB Layer alias
         *
         * Example:
-        *  `&slto OS_EN L_EN`
+        *  &slto OS_EN L_EN
         */
         slto: select_lang_and_go_to_layer {
             label = "SYNC_LANG_AND_LAYER";
@@ -199,15 +196,14 @@
         };
 
 		/**
-		 * Temporarily switches to a layer (`&mo`) while a modifier is held.
-		 * Analogous to QMKs `LM()`, using a parameterized macro.
+		 * Temporarily switches to a layer (&mo) while a modifier is held
 		 *
 		 * Params:
 		 *  1. Layer to switch to
 		 *  2. Modifier to press while layer is active
 		 *
 		 * Example:
-		 *  `&mom NUM_LAYER LSHIFT`
+		 *  &mom NUM_LAYER LSHIFT
 		 */
         mom: momentary_layer_with_modifier {
             compatible = "zmk,behavior-macro-two-param";
@@ -248,7 +244,7 @@
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
                     XXX &kp Z         &kp X         &kp C         &kp V         &kp B         XXX           XXX               XXX           XXX           &kp N         &kp M         XXX           XXX           &bt BT_CLR    XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
-                                                              XXX CTRL          ALT           SPACE_KB_NAV  XXX               &kp TAB       SHFT          &kp DEL       &kp ESC       XXX
+                                                              XXX CTRL          ALT           SPACE_KB_NAV  MOD_AND_SYS_NAV   &kp TAB       SHFT          &kp DEL       &kp ESC       XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
             >;
         };
