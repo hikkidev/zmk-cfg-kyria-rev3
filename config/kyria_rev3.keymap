@@ -47,8 +47,8 @@
 
 #define CTRL_OR_SHIFT &hst LSHIFT LCTRL
 
-#define UNDO LC(z)
-#define REDO LC(y)
+#define KB_UNDO LC(Z)
+#define KB_REDO LC(Y)
 
 #define COMBO_GLOBAL(NAME, BINDINGS, KEYPOS) \
   combo_##NAME { \
@@ -284,7 +284,7 @@
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
                     XXX &kp A         &kp S         &kp D         &kp F         &kp G                                                                     &kp H         &kp J         &kp K         &kp L         XXX           XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp Z         &kp X         &kp C         &kp V         &kp B         &kp UNDO      &kp REDO          XXX           XXX           &kp N         &kp M         XXX           XXX           &bt BT_CLR    XXX  
+                    XXX &kp Z         &kp X         &kp C         &kp V         &kp B         &kp KB_UNDO   &kp KB_REDO       XXX           XXX           &kp N         &kp M         XXX           XXX           &bt BT_CLR    XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
                                                               XXX OS_NAV_CMD    CTRL_OR_SHIFT SPACE_KB_NAV  &kp ENTER         &key_repeat   BSPC_KB_MOD   &kp DEL       XXX           XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
