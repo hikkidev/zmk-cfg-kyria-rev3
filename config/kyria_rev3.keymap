@@ -249,8 +249,11 @@
     combos {
         compatible = "zmk,combos";
         
-        COMBO_GLOBAL(dot, &kp DOT, 16 19)
-        COMBO_GLOBAL(comma, &kp COMMA, 15 20)
+        COMBO(dot_en, &kp DOT, 16 19, L_EN)
+        COMBO(comma_en, &kp COMMA, 15 20, L_EN)
+
+        COMBO(dot_ru, &kp FSLH, 16 19, L_RU)
+        COMBO(comma_ru, &kp QMARK, 15 20, L_RU)
     };
 
     keymap {
