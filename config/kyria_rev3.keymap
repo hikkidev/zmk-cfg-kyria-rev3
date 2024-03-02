@@ -10,12 +10,12 @@
 // OS Hotkeys
 
 // KbGUI (Windows / Command / Meta)
-#define OSM LGUI
-#define MOD(keycode) LG(keycode)
+#define OS_CMD LGUI
+#define OS_MOD(keycode) LG(keycode)
 
-#define OS_EN MOD(LA(N1))
-#define OS_RU MOD(LA(N2))
-#define OS_NEXT_LANG MOD(SPACE)
+#define OS_EN OS_MOD(LA(N1))
+#define OS_RU OS_MOD(LA(N2))
+#define OS_NEXT_LANG OS_MOD(SPACE)
 
 #define OS_KB_EN &kp OS_EN
 #define OS_KB_RU &kp OS_RU
@@ -26,25 +26,38 @@
 #define L_SYM 2
 #define L_NUM 3
 #define L_KB_NAV 4
-#define L_SYS_NAV 5
+#define L_KB_MOD 5
+#define L_OS_NAV 6
 
 // Macros
+
 #define CHARS_EN &slto OS_EN L_EN
 #define CHARS_RU &slto OS_RU L_RU
 #define SYMBOLS &to L_SYM
 #define NUMBERS &to L_NUM
-#define KB_NAV &mo L_KB_NAV
 #define SPACE_KB_NAV &hmot L_KB_NAV SPACE
+#define KB_MOD &mo L_KB_MOD
+#define OS_NAV_CMD &mom L_OS_NAV OS_CMD
 
-//#define ENTER_OS_NAV &os_nav ENTER
 
-
-#define MOD_AND_SYS_NAV &mom L_SYS_NAV OSM
-
-#define SHFT &skq LSHIFT
 #define CTRL &skq LCTRL
+#define SHIFT &skq LSHIFT
 #define ALT &skq LALT
 
+#define COMBO_GLOBAL(NAME, BINDINGS, KEYPOS) \
+  combo_##NAME { \
+    timeout-ms = <64>; \
+    bindings = <BINDINGS>; \
+    key-positions = <KEYPOS>; \
+};
+
+#define COMBO(NAME, BINDINGS, KEYPOS, LAYERS) \
+  combo_##NAME { \
+    timeout-ms = <64>; \
+    bindings = <BINDINGS>; \
+    key-positions = <KEYPOS>; \
+    layers = <LAYERS>; \
+};
 
 / {
     behaviors {
@@ -53,11 +66,12 @@
             compatible = "zmk,behavior-sticky-key";
             #binding-cells = <1>;
             bindings = <&kp>;
-            release-after-ms = <700>; // duration.extra-long1
+            release-after-ms = <1500>;
             quick-release;
             ignore-modifiers;
         };
 
+		// unused
         skqht: sticky_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -82,7 +96,7 @@
         //     tapping-term-ms = <100>; // duration.short2
         //     quick-tap-ms = <0>;
         //     flavor = "tap-preferred";
-        //     bindings = <MOD_AND_SYS_NAV>, <&kp>;
+        //     bindings = <OS_NAV_CMD>, <&kp>;
         // };
 
         /**
@@ -231,6 +245,15 @@
     │ 24  25  26  27  28  29  30  31 │ │ 32  33  34  35  36  37  38  39 │
     ╰───────────╮ 40  41  42  43  44 │ │ 45  46  47  48  49 ╭───────────╯
                 ╰────────────────────╯ ╰────────────────────╯            */
+	/ {
+	    combos {
+	        compatible = "zmk,combos";
+	        
+	        COMBO_GLOBAL(dot, &kp DOT, 16 19)
+	        COMBO_GLOBAL(comma, &kp COMMA, 15 20)
+	    };
+	};
+
 
     keymap {
         compatible = "zmk,keymap";
@@ -244,7 +267,7 @@
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
                     XXX &kp Z         &kp X         &kp C         &kp V         &kp B         XXX           XXX               XXX           XXX           &kp N         &kp M         XXX           XXX           &bt BT_CLR    XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
-                                                              XXX CTRL          ALT           SPACE_KB_NAV  MOD_AND_SYS_NAV   &kp TAB       SHFT          &kp DEL       &kp ESC       XXX
+                                                              XXX &kp INSERT    &kp ENTER     SPACE_KB_NAV  OS_NAV_CMD        &key_repeat   KB_MOD        &kp BACKSPACE &kp DEL       XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
             >;
         };
@@ -282,9 +305,9 @@
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
                     XXX &kp STAR      &kp N7        &kp N8        &kp N9        &kp PLUS                                                                  XXX           XXX           XXX           XXX           XXX           XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp N0        &kp N4        &kp N5        &kp N6        &kp EQUAL                                                                 &kp HOME      &kp LEFT      &kp UP        &kp RIGHT     &kp END       XXX  
+                    XXX &kp N0        &kp N1        &kp N2        &kp N3        &kp EQUAL                                                                 &kp HOME      &kp LEFT      &kp UP        &kp RIGHT     &kp END       XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp FSLH      &kp N1        &kp N2        &kp N3        &kp MINUS     XXX           XXX               XXX           XXX           XXX           &kp PG_UP     &kp DOWN      &kp PG_DN     XXX           XXX  
+                    XXX &kp FSLH      &kp N4        &kp N5        &kp N6        &kp MINUS     XXX           XXX               XXX           XXX           XXX           &kp PG_UP     &kp DOWN      &kp PG_DN     XXX           XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
                                                               XXX ___           ___           ___           ___               ___           ___           ___           ___           XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
@@ -305,16 +328,30 @@
             >;
         };
 
-        layer_system_navigation {
+        layer_kb_modifiers {
             bindings = <
                 // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
-                    XXX XXX           XXX           XXX           XXX           XXX                                                                       XXX           XXX           XXX           XXX           XXX           XXX  
+                    XXX &kp ESC       XXX           XXX           XXX           XXX                                                                       XXX           XXX           XXX           XXX           &kp ESC       XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
-                    XXX &kp N0        &kp N1        &kp N2        &kp N3        &kp N4                                                                    &kp N5        &kp N6        &kp N7        &kp N8        &kp N9        XXX  
+                    XXX XXX           ALT           CTRL          SHIFT         &kp TAB                                                                   &kp TAB       SHIFT         CTRL          ALT           XXX           XXX  
                 // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
                     XXX XXX           XXX           XXX           XXX           XXX           XXX           XXX               XXX           XXX           XXX           XXX           XXX           XXX           XXX           XXX  
                 // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
                                                               XXX XXX           XXX           XXX           XXX               XXX           XXX           XXX           XXX           XXX
+                //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
+            >;
+        };
+
+        layer_os_navigation {
+            bindings = <
+                // ╭───┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮                                                           ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬───╮
+                    XXX XXX           &kp N7        &kp N8        &kp N9        XXX                                                                       XXX           XXX           XXX           XXX           XXX           XXX  
+                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤                                                           ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
+                    XXX &kp N0        &kp N1        &kp N2        &kp N3        &kp LA(UP)                                                                &kp TAB       &kp LEFT      &kp UP        &kp RIGHT     XXX           XXX  
+                // ├───┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤─────────────┬─────────────╮   ╭─────────────┬─────────────├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼───┤
+                    XXX XXX           &kp N4        &kp N5        &kp N6        &kp LA(DOWN)  XXX           XXX               XXX           XXX           XXX           &kp PG_UP     &kp DOWN      &kp PG_DN     XXX           XXX  
+                // ╰───┴─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤─────────────┼─────────────┤   ├─────────────┼─────────────├─────────────┼─────────────┼─────────────┴─────────────┴─────────────┴───╯
+                                                              XXX XXX           XXX           XXX           XXX               XXX           &kp LSHIFT    XXX           XXX           XXX
                 //                                           ╰───┴─────────────┴─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────┴─────────────┴───╯
             >;
         };
